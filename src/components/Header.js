@@ -19,18 +19,30 @@ const Header = (props) => {
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
-        setUser(user);
+        dispatch(
+          setUserLoginDetails({
+            name: user.displayName,
+            email: user.email,
+            photo: user.photoURL,
+          })
+        );
         history.push("/home");
       }
     });
-  }, [userName]);
+  }, [userName, history, dispatch]);
 
   const handleAuth = () => {
     if (!userName) {
       auth
         .signInWithPopup(provider)
         .then((result) => {
-          setUser(result.user);
+          dispatch(
+            setUserLoginDetails({
+              name: result.user.displayName,
+              email: result.user.email,
+              photo: result.user.photoURL,
+            })
+          );
         })
         .catch((error) => {
           alert(error.message);
@@ -44,16 +56,6 @@ const Header = (props) => {
         })
         .catch((err) => alert(err.message));
     }
-  };
-
-  const setUser = (user) => {
-    dispatch(
-      setUserLoginDetails({
-        name: user.displayName,
-        email: user.email,
-        photo: user.photoURL,
-      })
-    );
   };
 
   return (
@@ -71,23 +73,23 @@ const Header = (props) => {
               <img src="/images/home-icon.svg" alt="HOME" />
               <span>HOME</span>
             </a>
-            <a>
+            <a href="/#">
               <img src="/images/search-icon.svg" alt="SEARCH" />
               <span>SEARCH</span>
             </a>
-            <a>
+            <a href="/#">
               <img src="/images/watchlist-icon.svg" alt="WATCHLIST" />
               <span>WATCHLIST</span>
             </a>
-            <a>
+            <a href="/#">
               <img src="/images/original-icon.svg" alt="ORIGINALS" />
               <span>ORIGINALS</span>
             </a>
-            <a>
+            <a href="/#">
               <img src="/images/movie-icon.svg" alt="MOVIES" />
               <span>MOVIES</span>
             </a>
-            <a>
+            <a href="/#">
               <img src="/images/series-icon.svg" alt="SERIES" />
               <span>SERIES</span>
             </a>
@@ -187,9 +189,9 @@ const NavMenu = styled.div`
       }
     }
   }
-  /* @media (max-width: 768px) {
+  @media (max-width: 768px) {
     display: none;
-  } */
+  }
 `;
 
 const Login = styled.a`
