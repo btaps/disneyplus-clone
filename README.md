@@ -2,7 +2,7 @@
   Disney+ Clone App
 </h1>
 <p align="center">
-  <a href="https://disneyplus-clone-8ac52.web.app/home" target="_blank">
+  <a href="https://disneyplus-clone-8ac52.web.app" target="_blank">
     <img src="https://img.shields.io/badge/firebase%20-%23039BE5.svg?&style=for-the-badge&logo=firebase" alt="Firebase" />
   </a>
 </p>
